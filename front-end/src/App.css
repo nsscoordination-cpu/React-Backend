@@ -1,0 +1,111 @@
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.ViewTable,td,th{
+  border-width:1px;
+  border-style: solid;
+  border-collapse: collapse;
+
+}
+.score{
+  width: 100px !important;
+}
+table{
+  width: 80%;
+  margin: auto;
+}
+/* Dashboard Title */
+.dash-title {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Cards Container */
+.dash-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+/* Each Card */
+.dash-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.dash-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+/* Card Icon */
+.card-icon {
+  font-size: 40px;
+  margin-right: 15px;
+}
+
+.students {
+  color: #3b82f6;
+}
+.volunteers {
+  color: #10b981;
+}
+.complaints {
+  color: #ef4444;
+}
+.events {
+  color: #f59e0b;
+}
+
+/* Card Info */
+.card-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Recent Activities Section */
+.recent-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.recent-section h3 {
+  margin-bottom: 10px;
+}
+
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.recent-list li:last-child {
+  border-bottom: none;
+}

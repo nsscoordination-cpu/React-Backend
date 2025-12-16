@@ -1,0 +1,54 @@
+.loginbutton{
+    background-color:rgb(158, 213, 245);
+    margin-top: 30px;
+    width: 50%;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+}
+.loginbutton:hover{
+    padding-right: 800px;
+    padding-top:30px;
+    padding: 10px;
+    background-color: rgb(6, 15, 196);
+    color: rgb(32, 131, 225);
+    cursor: progress;
+    border: none;
+    border-radius: 10px;
+}
+.login{
+    height: 250px;
+    width: 500px;
+    border: 1px solid rgb(8, 14, 180);
+    border-radius: 30px;
+    margin: auto;
+    /* margin-top: 35px; */
+    margin-bottom: 500px;
+    /* background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.deccanchronicle.com%2Ftabloid%2Fhyderabad-chronicle%2Fnss-tiny-atoms-of-big-change-1816675&psig=AOvVaw0PjaXpJqbYXqSRf0iw1PV7&ust=1760178628797000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNCEp8-2mZADFQAAAAAdAAAAABAR); */
+    background-repeat:no-repeat;
+    /* background-size: ; */
+    /* background:linear-gradient(red,green,rgba(104, 137, 209, 0.422)); */
+    background-size: cover;
+    background-position: center;
+    /* padding-left: 60px; */
+    background-color:rgba(239, 232, 232, 0.5);
+    text-align: center;
+}   
+.loginpage{
+    height: 100vh;
+    background-size: cover;
+    background-repeat:no-repeat;
+    padding-top: 180px;
+  background-image:url(https://upload.wikimedia.org/wikipedia/commons/3/3a/The_National_Service_Scheme_%28NSS%29_Marching_Contingent_passes_through_the_Rajpath%2C_on_the_occasion_of_the_68th_Republic_Day_Parade_2017%2C_in_New_Delhi_on_January_26%2C_2017.jpg);
+  background-size: cover;
+  background-repeat:no-repeat;
+  
+ 
+
+}
+.login table{
+    width: 75%;
+}
+input:focus{
+    outline: none;
+}

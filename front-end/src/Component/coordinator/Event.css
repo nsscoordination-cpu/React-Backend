@@ -1,0 +1,53 @@
+/* Container styling */
+.event-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title styling */
+.event-title {
+  color: #4e73df;
+}
+
+/* Table styling */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Table header */
+.event-table thead {
+  background: linear-gradient(90deg, #4e73df, #224abe);
+  color: white;
+  font-weight: bold;
+}
+
+/* Table cells */
+.event-table th,
+.event-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect for rows */
+.event-table tbody tr:hover {
+  background-color: #f1f3f6;
+  transition: 0.3s;
+}
+
+/* Button styling */
+.edit-btn {
+  border-radius: 20px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.edit-btn:hover {
+  transform: scale(1.05);
+}
