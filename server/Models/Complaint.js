@@ -5,7 +5,8 @@ const ComplaintSchema=new Schema({
     studentId:{type: Schema.Types.ObjectId,ref: "Student",required: true},
     complaint:{type:String,required:true},
     date:{type:String},
-    replay:{type:String,default:""}
+    replay:{type:String,default:""},
+    status:{type:String,default:"pending",enum:["pending","replied"]}
 
 },{timestamps:true})
 

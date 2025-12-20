@@ -5,6 +5,7 @@ import cordinatorrouter from "./Routes/CordinatorRoutes.js";
 import loginrouter from "./Routes/LoginRoutes.js";
 import EventRoutes from "./Routes/EventRoutes.js";
 import studentrouter from "./Routes/StudentRoutes.js";
+import adminRoutes from "./Routes/adminRoutes.js";
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: "*" }));
@@ -26,3 +27,4 @@ app.use("/api/event",EventRoutes)
 app.use("/api/student",studentrouter)
 app.use("/api/login",loginrouter)
 app.use("/uploads",express.static("uploads"));
+app.use("/api/admin",adminRoutes)
