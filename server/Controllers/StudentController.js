@@ -13,6 +13,7 @@ import Event from "../Models/Event.js";
 import { error, profile } from "console";
 import ATTENDANCE from "../Models/Attendence.js";
 import Complaint from "../Models/Complaint.js";
+import FEEDBACK from "../Models/Feedback.js";
 
 export const registerStudent = async (req, res) => {
     console.log(req.body);
@@ -121,20 +122,30 @@ export const registerStudent = async (req, res) => {
 
 export const postfeedback = async (req, res) => {
   try {
-    const { text, studentId } = req.body;
+    const{studentId}=req.params
+    const { feedback,eventId,rating } = req.body;
+console.log(studentId,eventId,rating,feedback);
+
 
     // ✅ Validate
-    if (!text || !studentId) {
+    if (!feedback || !studentId || !eventId || !rating) {
       return res.status(400).json({
         success: false,
         message: "Feedback text and student ID are required",
       });
     }
 
+    const user = await STUDENT.findOne({commonKey:studentId})
+    console.log(user._id);
+    
+
     // ✅ Create new feedback record
     const newFeedback = new FEEDBACK({
-      feedback: text,
-      studentId: studentId,
+      feedback,
+      studentId: user._id,
+      eventId,
+      rating
+
     });
 
     await newFeedback.save();

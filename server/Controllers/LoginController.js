@@ -5,6 +5,8 @@ import STUDENT from "../Models/Student.js";
 export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(username,password,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    
 
     const user = await LOGIN.findOne({ username });
     if (!user) {

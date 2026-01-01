@@ -4,6 +4,7 @@ import LOGIN from "../Models/Login.js";
 import bcrypt from "bcrypt"
 import STUDENT from "../Models/Student.js";
 import ATTENDANCE from "../Models/Attendence.js";
+import FEEDBACK from "../Models/Feedback.js";
 export const addcoordinator = async (req, res) => {
   try {
     const { name, email, phone, department, password } = req.body;
@@ -384,3 +385,21 @@ export const updateAttendance = async (req, res) => {
     });
   }
 };
+export const AddFeedback = async (req,res) => {
+  try{
+     const {id  } = req.params;
+     const eventfeedbacks = await FEEDBACK.find({eventId:id})
+         return res.json({
+      success: true,
+      message: "Attendance updated successfully!",
+      eventfeedbacks
+    });
+  }
+    catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error updating attendance",
+    });
+  }
+}

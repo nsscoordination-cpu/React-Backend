@@ -6,7 +6,7 @@ const   studentrouter = express.Router();
 
 studentrouter.post("/register",uploadStudent.single("Image"),registerStudent)
 studentrouter.get("/events",getallevents)
-studentrouter.post("/feedback",postfeedback)
+studentrouter.post("/feedback/:studentId",postfeedback)
 studentrouter.post("/complaint/:id",postComplaint)
 studentrouter.get("/complaints/:studentId",getStudentComplaints)
 studentrouter.get("/attendance/:studentId",getStudentAttendance)
