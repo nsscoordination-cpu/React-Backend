@@ -127,9 +127,9 @@ function ViewFeedback() {
             <Col md={6} key={index} className="mb-3">
               <Card className="shadow-sm">
                 <Card.Body>
-                  <Card.Title className="text-primary">
+                  {/* <Card.Title className="text-primary">
                     Student: {item.studentId?.name || "Anonymous"}
-                  </Card.Title>
+                  </Card.Title> */}
 
                   <Card.Text className="mt-2">
                     <strong>Feedback:</strong>
@@ -141,9 +141,7 @@ function ViewFeedback() {
                     <strong>Rating:</strong> ⭐ {item.rating}/5
                   </Card.Text>
 
-                  <Button variant="outline-info" size="sm">
-                    Reply
-                  </Button>
+                  
                 </Card.Body>
               </Card>
             </Col>

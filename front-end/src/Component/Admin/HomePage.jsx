@@ -7,9 +7,13 @@ import StudentPerf from "./StudentPerf";
 import ViewFeedback from "./ViewFeedback";
 import AddCoordinator from "./AddCordinator";
 import EditCordinator from "./EditCordinator";
+import { useNavigate } from "react-router-dom";
+import ViewComplaint from "./ViewComplaint";
 
 // --- Pages ---
 function DashboardPage() {
+
+  
 
   return (
     <>
@@ -82,7 +86,7 @@ function AdminDashboard() {
       case "Students": return <Viewstudent />;
       case "Performance": return <StudentPerf />;
       case "Feedback": return <ViewFeedback />;
-      // case "Complaints": return <ComplaintsPage />;
+      case "Complaints": return <ViewComplaint />;
       default: return <DashboardPage />;
     }
   };
@@ -90,6 +94,13 @@ function AdminDashboard() {
   const menuItems = [
     "Dashboard", "Coordinators", "Students", "Performance", "Feedback", "Complaints"
   ];
+
+    const navigate=useNavigate()
+
+  const logout=async()=>{ 
+navigate("/")
+localStorage.clear()
+  } 
 
   return (
     <div className="layout">
@@ -109,7 +120,7 @@ function AdminDashboard() {
           ))}
         </ul>
 
-        <button className="logout-btn">Logout</button>
+        <button className="logout-btn" onClick={()=>logout()}>Logout</button>
       </aside>
 
       <main className="content">

@@ -21,10 +21,12 @@ function LoginPage() {
     if(result.data.role=="cordinator"){
       navigate('/coordinatorHome')
     }
+    
     else  if(result.data.role=="admin"){
       navigate('/adminHomepage')
     }
-
+setusername("");
+setpassword("");
   
   }
   catch(e){

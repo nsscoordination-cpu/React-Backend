@@ -7,9 +7,14 @@ import AddEvents from "./AddEvents";
 // import Performance from "./Performance";
 import Event from "./Event";
 // import Coordinators from "./Coordinators";
-import GeneralPerformance from "./GeneralPerformance";
+// import GeneralPerformance from "./GeneralPerformance";
 import ApproveStudent from "./ApproveStudents";
 import Attendence from "./Attendence";
+import { useNavigate } from "react-router-dom";
+import ViewStudentPerformanceCORD from "./ViewStudentPerformanceCORD";
+import StudentPerformanceCORD from "./StudentPerformanceCORD";
+import Notifications from "./Notifications";
+import ViewFeedback from "../Admin/ViewFeedback";
 
 
 function CoordinatorHome() {
@@ -88,10 +93,21 @@ if (activePage === "Students")
     return <ApproveStudent></ApproveStudent>;
 
 if(activePage ==="Attendence") return <Attendence />;
-
+if(activePage ==="ViewPerformance") return <ViewStudentPerformanceCORD />
+if(activePage ==="AddPerformance") return <StudentPerformanceCORD />
+if(activePage ==="SentNotifications") return <Notifications />
+if(activePage ==="ViewFeedback") return <ViewFeedback />
     return <></>;
   };
 
+
+  
+    const navigate=useNavigate()
+    
+      const logout=async()=>{ 
+    navigate("/")
+    localStorage.clear()
+      } 
   return (
     <div className="layout">
       {/* Sidebar */}
@@ -117,10 +133,10 @@ if(activePage ==="Attendence") return <Attendence />;
           </li>
 
           <li
-            className={activePage === "Performance" ? "active" : ""}
-            onClick={() => setActivePage("Performance")}
+            className={activePage === "AddPerformance" ? "active" : ""}
+            onClick={() => setActivePage("AddPerformance")}
           >
-            Performance
+           Add Performance
           </li>
           <li
             className={activePage === "Event" ? "active" : ""}
@@ -136,9 +152,31 @@ if(activePage ==="Attendence") return <Attendence />;
             Attendence
 
           </li>
+           <li
+            className={activePage === "ViewPerformance" ? "active" : ""}
+            onClick={() => setActivePage("ViewPerformance")}
+          >
+            View Performance
+
+          </li>
+           <li
+            className={activePage === "SentNotifications" ? "active" : ""}
+            onClick={() => setActivePage("SentNotifications")}
+          >
+             Sent Notifications
+
+          </li>
+          <li
+            className={activePage === "ViewFeedback" ? "active" : ""}
+            onClick={() => setActivePage("ViewFeedback")}
+          >
+             View Feedback
+
+          </li>
+          
         </ul>
 
-        <button className="logout-btn">Logout</button>
+        <button className="logout-btn"  onClick={()=>logout()}>Logout</button>
       </aside>
 
       {/* Main Content */}

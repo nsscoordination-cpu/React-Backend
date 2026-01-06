@@ -5,6 +5,8 @@ import bcrypt from "bcrypt"
 import STUDENT from "../Models/Student.js";
 import ATTENDANCE from "../Models/Attendence.js";
 import FEEDBACK from "../Models/Feedback.js";
+import PERFORMANCE from "../Models/Performance.js";
+import NOTIFICATION from "../Models/Notification.js";
 export const addcoordinator = async (req, res) => {
   try {
     const { name, email, phone, department, password } = req.body;
@@ -388,7 +390,7 @@ export const updateAttendance = async (req, res) => {
 export const AddFeedback = async (req,res) => {
   try{
      const {id  } = req.params;
-     const eventfeedbacks = await FEEDBACK.find({eventId:id})
+     const eventfeedbacks = await FEEDBACK.find({eventId:id}).populate("studentId", "name")
          return res.json({
       success: true,
       message: "Attendance updated successfully!",
@@ -400,6 +402,178 @@ export const AddFeedback = async (req,res) => {
     return res.status(500).json({
       success: false,
       message: "Error updating attendance",
+
+      
+    });
+  }
+}
+
+
+
+
+export const addPerformance = async (req, res) => {
+  console.log(req.body , "reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+  
+  try {
+    const { studentId, participationLevel, remarks, attendance } = req.body; 
+
+    // ✅ Check if student exists
+    const student = await STUDENT.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+
+    // ✅ Prevent duplicate performance entry
+    const existing = await PERFORMANCE.findOne({ studentId });
+    if (existing) {
+      return res.status(400).json({ success: false, message: "Performance already added" });
+    }
+
+    // ✅ Create new record
+    const newPerformance = new PERFORMANCE({
+      studentId,
+      participationLevel,
+      remarks,
+      attendance,
+    });
+
+    await newPerformance.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Performance added successfully",
+      data: newPerformance,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error while adding performance",
+    });
+  }
+};
+
+
+
+
+export const getStudentAttendance = async (req, res) => {
+  try {
+    const studentId = req.params.studentId; // ✅ Comes from frontend
+console.log(studentId,'oooooooo');
+
+    const student = await STUDENT.findById(studentId);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+
+    // ✅ Count total NSS events
+    const totalEvents = await Event.countDocuments();
+
+    // ✅ Count attended events
+    const attended = await ATTENDANCE.countDocuments({
+      studentId: student._id,
+      present: true,
+    });
+
+    return res.json({
+      success: true,
+      totalSessions: totalEvents,
+      attended: attended,
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error while fetching attendance",
+    });
+  }
+};
+
+
+
+
+export const getAllPerformances = async (req, res) => {
+  try {
+    const performances = await PERFORMANCE.find()
+      .populate("studentId", "name regYear className department dob")
+      .sort({ createdAt: -1 });
+
+    return res.json({
+      success: true,
+      performances,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching performances",
+    });
+  }
+};
+
+
+
+export const notifications = async (req, res) => {
+  const { batches, message } = req.body;
+
+  try {
+    // ✅ Create and save notification
+    const newNotification = await NOTIFICATION.create({
+      batches,
+      message,
+    });
+
+    res.json({
+      success: true,
+      message: "Notification saved successfully",
+      notification: newNotification,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error saving notification",
+    });
+  }
+};
+
+export const viewallnoti = async(req,res)=>{
+  try{
+const all =await NOTIFICATION.find().sort({createdAt:-1})
+return     res.json({
+      success: true,
+      message: "Notification get successfully",
+      notification: all,
+    });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error saving notification",
+    });
+  }
+}
+
+export const deletePerformance = async(req,res)=>{
+  const {id} = req.params
+  try{
+const deletePERFORMANCE =await PERFORMANCE.findByIdAndDelete(id)
+return     res.json({
+      success: true,
+      message: "Deleted successfully",
+    });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error",
     });
   }
 }

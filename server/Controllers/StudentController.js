@@ -280,6 +280,7 @@ export const getVerifiedStudents = async (req, res) => {
 export const getStudentAttendance = async (req, res) => {
   try {
     const studentId = req.params.studentId; // ✅ Comes from frontend
+console.log(studentId,'lllllll');
 
     const student = await STUDENT.findOne({commonKey:studentId});
 

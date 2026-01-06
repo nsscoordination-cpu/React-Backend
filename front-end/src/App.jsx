@@ -20,6 +20,9 @@ import CordinatorHome from './Component/coordinator/CordinatorHome'
 import EditCordinator from './Component/Admin/EditCordinator'
 import EditEvents from './Component/coordinator/EditEvents'
 import ViewComplaint from './Component/Admin/ViewComplaint'
+import StudentPerformanceCORD from './Component/coordinator/StudentPerformanceCORD'
+import ViewStudentPerformanceCORD from './Component/coordinator/ViewStudentPerformanceCORD'
+import Notifications from './Component/coordinator/Notifications'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -67,8 +70,11 @@ function App() {
           <Route path='/coordinatorHome' element={<CordinatorHome/>}/>
           <Route path='/Edit' element={<EditCordinator/>}/>
           <Route path='/EditEvents/:id' element={<EditEvents/>}/>
-          <Route path='/Notifications' element={<Notification></Notification>}/>
           <Route path='/AdminComplaint' element={<ViewComplaint></ViewComplaint>}/>
+          <Route path='/addperformance' element={<StudentPerformanceCORD/>}/>
+          <Route path='/viewperformance' element={<ViewStudentPerformanceCORD/>}/>
+          <Route path='/sentNotification' element={<Notifications/>}/>
+          
           
 
 

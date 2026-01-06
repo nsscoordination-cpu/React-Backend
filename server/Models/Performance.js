@@ -1,9 +1,29 @@
 import mongoose, { Schema } from "mongoose";
 
-const performanceSchema=new Schema({
-    name:{type:String,required:true},
-    performance:{type:String,required:true},
-    score:{type:String,required:true},
-})
-const performance=mongoose.model("Performance",performanceSchema)
-export default Performance
+const performanceSchema = new Schema(
+  {
+    studentId: {
+      type: Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
+      unique: true,   
+    },
+    participationLevel: {
+      type: String,
+      enum: ["Excellent", "Active", "Average", "Poor"], // optional validation
+      required: true,
+    },
+    remarks: {
+      type: String,
+      default: "",
+    },
+    attendance: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
+
+const PERFORMANCE = mongoose.model("Performance", performanceSchema);
+export default PERFORMANCE;

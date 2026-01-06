@@ -1,6 +1,6 @@
 import express from "express";
 import { editprofile, fetchallStudents, fetchprofile, getallevents, getEventspresented, getStudentAttendance, getStudentComplaints, getStudentPerformans, notifications, postComplaint, postfeedback, registerStudent } from "../Controllers/StudentController.js";
-import uploadStudent from "../middilewhere/uploude.js";
+import { uploadStudent } from "../middilewhere/uploude.js";
 
 const   studentrouter = express.Router();
 
