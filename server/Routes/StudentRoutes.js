@@ -16,4 +16,5 @@ studentrouter.get("/allStudents",fetchallStudents)
 studentrouter.get("/profile/:id",fetchprofile)
 studentrouter.put("/profile/:id",editprofile)
 studentrouter.get("/events/present/:studentId",getEventspresented)
+studentrouter.get("/getNotification/:regYear",notifications)
 export default studentrouter;

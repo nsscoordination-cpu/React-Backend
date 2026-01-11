@@ -11,6 +11,7 @@ EventRoutes.post(
   "/events/:eventId/photos",
   uploadEventPhotos.array("photos", 10),
   addEventPhotos
+
 );
 EventRoutes.get("/events/:eventId/photos", getEventPhotos);
 

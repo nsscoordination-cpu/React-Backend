@@ -14,6 +14,8 @@ import { error, profile } from "console";
 import ATTENDANCE from "../Models/Attendence.js";
 import Complaint from "../Models/Complaint.js";
 import FEEDBACK from "../Models/Feedback.js";
+import NOTIFICATION from "../Models/Notification.js";
+import PERFORMANCE from "../Models/Performance.js";
 
 export const registerStudent = async (req, res) => {
     console.log(req.body);
@@ -383,17 +385,14 @@ export const getEventspresented=async(req,res)=>{
 
 export const getStudentPerformans = async (req, res) => {
   const { studentId } = req.params;
+console.log(studentId);
 
   try {
     // ✅ Find performance data for this student
     const performance = await PERFORMANCE.findOne({ studentId });
 
-    if (!performance) {
-      return res.status(404).json({
-        success: false,
-        message: "No performance data found for this student",
-      });
-    }
+console.log("performanceeeeeeeeeeeeeeeeeeeeeeeee",performance);
+
 
     // ✅ Return only performance data
     return res.status(200).json({
@@ -514,6 +513,11 @@ export const editprofile=async(req,res)=>{
   });
   }
 }
+
+
+
+
+
 
 
 

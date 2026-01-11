@@ -252,7 +252,7 @@ console.log(students);
                   <Image
                     src={
                       selected?.photo
-                        ? `http://localhost:8000/uploads/${selected.photo}`
+                        ? `http://localhost:8000/uploads/students/${selected.photo} `
                         : "/default-user.png"
                     }
                     rounded
