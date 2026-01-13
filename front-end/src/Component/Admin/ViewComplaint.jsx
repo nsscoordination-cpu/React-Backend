@@ -116,10 +116,12 @@ const ViewComplaint = () => {
           <div key={c._id} className="card">
             <div className="header">
               <div>
-                <strong>{student?.name || "Unknown Student"}</strong>
+                <strong>{student?.name || "Terminated Student"}</strong>
                 <p className="sub">
-                  Class: {student?.className || "-"} | Email:{" "}
-                  {student?.email || "-"}
+                  {student ?
+                  <>
+                  Class: {student?.className} | Email:{" "}
+                  {student?.email} </> : "Terminated Student" }
                 </p>
               </div>
               <span className="date">

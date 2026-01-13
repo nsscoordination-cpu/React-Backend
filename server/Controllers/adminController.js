@@ -1,4 +1,6 @@
 import Complaint from "../Models/Complaint.js"
+import CORDINATOR from "../Models/Coordinator.js";
+import Event from "../Models/Event.js";
 import PERFORMANCE from "../Models/Performance.js";
 import STUDENT from "../Models/Student.js";
 
@@ -81,3 +83,26 @@ export const getAllStudentPerformances = async (req, res) => {
     });
   }
 };
+
+export const adminStats= async(req,res)=>{
+  try{
+    const allstudents = await STUDENT.countDocuments()
+    console.log(allstudents);
+    const allEvents = await Event.countDocuments()
+    console.log(allEvents);
+    const allcoordinators = await CORDINATOR.countDocuments()
+    console.log(allcoordinators);
+    const pendingcomplaints = await Complaint.countDocuments({status:"pending"})
+    console.log(pendingcomplaints);
+    return res.status(200).json({allstudents,allEvents,pendingcomplaints,allcoordinators})
+    
+  }
+  catch(e){
+    console.log(e);
+    res.status(500).json({
+      success: false,
+      message: "Error",
+    });
+  }
+}
+

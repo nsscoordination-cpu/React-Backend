@@ -1,11 +1,3 @@
-// import ATTENDANCE from "../Modals/Attendance.js";
-// import COMPLAINT from "../Modals/Complaint.js";
-// import EVENT from "../Modals/Event.js";
-// import FEEDBACK from "../Modals/Feedback.js";
-// import LOGIN from "../Modals/Login.js";
-// import NOTIFICATION from "../Modals/Notification.js";
-// import PERFORMANCE from "../Modals/Performance.js";
-// import STUDENT from "../Modals/Student.js";
 import bcrypt from "bcryptjs";
 import LOGIN from "../Models/Login.js";
 import STUDENT from "../Models/Student.js";
@@ -17,11 +9,7 @@ import FEEDBACK from "../Models/Feedback.js";
 import NOTIFICATION from "../Models/Notification.js";
 import PERFORMANCE from "../Models/Performance.js";
 
-export const registerStudent = async (req, res) => {
-    console.log(req.body);
-    console.log(req.file.path);
-    
-    
+export const registerStudent = async (req, res) => {    
   try {
     const {
       name,
@@ -62,6 +50,8 @@ export const registerStudent = async (req, res) => {
     // ✅ Check email duplicate
     const existing = await LOGIN.findOne({ username:email });
     if (existing) {
+      console.log("Email already registered.");
+      
       return res
         .status(400)
         .json({ success: false, message: "Email already registered." });
@@ -366,23 +356,6 @@ export const getEventspresented=async(req,res)=>{
   }
 }
 
-// export const getStudentPerformans = async(req,res)=>{
-//   const {studentId} = req.params
-//   console.log(studentId);
-
-//   try{
-//     const performance = await PERFORMANCE.findOne({studentId : studentId})
-//     console.log(performance);
-    
-//   }
-//   catch(e){
-//     console.log(e);
-    
-//   }
-  
-// }
-
-
 export const getStudentPerformans = async (req, res) => {
   const { studentId } = req.params;
 console.log(studentId);
@@ -513,17 +486,3 @@ export const editprofile=async(req,res)=>{
   });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

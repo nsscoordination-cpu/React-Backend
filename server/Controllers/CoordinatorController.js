@@ -7,6 +7,7 @@ import ATTENDANCE from "../Models/Attendence.js";
 import FEEDBACK from "../Models/Feedback.js";
 import PERFORMANCE from "../Models/Performance.js";
 import NOTIFICATION from "../Models/Notification.js";
+import Complaint from "../Models/Complaint.js";
 export const addcoordinator = async (req, res) => {
   try {
     const { name, email, phone, department, password } = req.body;
@@ -571,6 +572,50 @@ return     res.json({
   }
   catch (error) {
     console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error",
+    });
+  }
+}
+
+export const deleteStudent= async(req,res)=>{
+  const {id} = req.params
+  try{
+    const deletePerf = await PERFORMANCE.deleteMany({ studentId: id });
+
+
+    const student = await STUDENT.findById(id).select("commonKey")
+    console.log(student.commonKey);
+    const deletelogin=await LOGIN.findByIdAndDelete(student.commonKey)  
+    const deleteS =await STUDENT.findByIdAndDelete(id)
+return     res.status(200).json({
+      success: true,
+      message: "Deleted successfully",
+    });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error",
+    });
+  }
+}
+
+export const CordStats= async(req,res)=>{
+  try{
+    const allstudents = await STUDENT.countDocuments()
+    console.log(allstudents);
+    const allEvents = await Event.countDocuments()
+    console.log(allEvents);
+    return res.status(200).json({allstudents,allEvents})
+
+    
+    
+  }
+  catch(e){
+    console.log(e);
     res.status(500).json({
       success: false,
       message: "Error",

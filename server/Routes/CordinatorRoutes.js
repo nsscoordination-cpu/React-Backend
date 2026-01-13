@@ -1,5 +1,5 @@
 import express from "express"
-import { addcoordinator, getAllCoordinators, editcordinator, deletecord, approvestd, rejectstd, getAttendanceByEvent, updateAttendance, AddFeedback, addPerformance, getAllPerformances, getStudentAttendance, notifications, viewallnoti, deletePerformance } from "../Controllers/CoordinatorController.js"
+import { addcoordinator, getAllCoordinators, editcordinator, deletecord, approvestd, rejectstd, getAttendanceByEvent, updateAttendance, AddFeedback, addPerformance, getAllPerformances, getStudentAttendance, notifications, viewallnoti, deletePerformance, deleteStudent, CordStats } from "../Controllers/CoordinatorController.js"
 import { getallevents, getVerifiedStudents } from "../Controllers/StudentController.js"
 const cordinatorrouter=express.Router()
 cordinatorrouter.post("/add",addcoordinator)
@@ -19,4 +19,6 @@ cordinatorrouter.get('/attendence/:studentId',getStudentAttendance)
 cordinatorrouter.post("/sendnotification",notifications)
 cordinatorrouter.get("/ViewAllnoti",viewallnoti)
 cordinatorrouter.delete("/delete/performance/:id",deletePerformance)
+cordinatorrouter.delete("/deleteStudent/:id",deleteStudent)
+cordinatorrouter.get("/stats",CordStats)
 export default cordinatorrouter

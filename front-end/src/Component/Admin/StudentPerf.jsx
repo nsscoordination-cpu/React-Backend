@@ -10,6 +10,8 @@ function StudentPerf() {
     try {
       const res = await api.get("/admin/performance/allStudents");
       setStudentsPerf(res.data.performances || []);
+      console.log(res);
+      
     } catch (error) {
       console.log(error);
     }

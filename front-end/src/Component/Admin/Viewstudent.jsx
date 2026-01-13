@@ -130,7 +130,7 @@ function Viewstudent() {
             {/* ===== STUDENT PHOTO ===== */}
       <div className="text-center mb-3">
         <img
-          src={`http://localhost:8000/uploads/${selectedStudent.photo}`}
+          src={`http://localhost:8000/uploads/students/${selectedStudent.photo}`}
           alt="Student"
           className="rounded-circle border"
           style={{

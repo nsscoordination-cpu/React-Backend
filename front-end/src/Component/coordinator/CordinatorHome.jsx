@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomepageCo.css";
 import AddEvents from "./AddEvents";
 
@@ -15,10 +15,13 @@ import ViewStudentPerformanceCORD from "./ViewStudentPerformanceCORD";
 import StudentPerformanceCORD from "./StudentPerformanceCORD";
 import Notifications from "./Notifications";
 import ViewFeedback from "../Admin/ViewFeedback";
+import api from "../../api";
 
 
 function CoordinatorHome() {
-  const [activePage, setActivePage] = useState("Dashboard"); // DEFAULT
+  const [activePage, setActivePage] = useState("Dashboard"); // DEFAULT4
+  const [Tstd,setTstd] = useState("")
+  const [Tevent,setTevent] = useState("")
 
   const renderPage = () => {
     
@@ -35,31 +38,32 @@ function CoordinatorHome() {
           <div className="card-icon students">👥</div>
           <div className="card-info">
             <p>Total Students</p>
-            <h3>120</h3>
+            <h3>{Tstd}</h3>
           </div>
         </div>
 
-        <div className="dash-card">
+        {/* <div className="dash-card">
           <div className="card-icon volunteers">⭐</div>
           <div className="card-info">
             <p>Active Volunteers</p>
             <h3>85</h3>
           </div>
-        </div>
+        </div> */}
 
-        <div className="dash-card">
+        {/* <div className="dash-card">
           <div className="card-icon complaints">⚠️</div>
           <div className="card-info">
             <p>Pending Complaints</p>
             <h3>3</h3>
           </div>
-        </div>
+        </div> */}
 
         <div className="dash-card">
           <div className="card-icon events">📅</div>
           <div className="card-info">
-            <p>Upcoming Events</p>
-            <h3>2</h3>
+            <p>Events</p>
+            <h3>{Tevent
+              }</h3>
           </div>
         </div>
 
@@ -108,6 +112,21 @@ if(activePage ==="ViewFeedback") return <ViewFeedback />
     navigate("/")
     localStorage.clear()
       } 
+
+      const dashboardstats = async()=>{
+        try{
+        const res = await api.get("/coordinator/stats")
+        console.log(res);
+        setTstd(res.data.allstudents)
+        setTevent(res.data.allEvents)
+        }
+        catch(e){
+          console.log(e);
+          
+        }
+        
+      }
+      useEffect(()=>{dashboardstats()},[])
   return (
     <div className="layout">
       {/* Sidebar */}

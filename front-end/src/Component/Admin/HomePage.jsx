@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import ManageCordinators from "./ManageCordinators";
 import Viewstudent from "./Viewstudent";
@@ -9,9 +9,10 @@ import AddCoordinator from "./AddCordinator";
 import EditCordinator from "./EditCordinator";
 import { useNavigate } from "react-router-dom";
 import ViewComplaint from "./ViewComplaint";
+import api from "../../api";
 
 // --- Pages ---
-function DashboardPage() {
+function DashboardPage({tstudents,te,tc,pc}) {
 
   
 
@@ -23,10 +24,10 @@ function DashboardPage() {
       </header>
 
       <div className="cards">
-        <div className="card"><h3>Total Students</h3><p>152</p></div>
-        <div className="card"><h3>Total Coordinators</h3><p>12</p></div>
-        <div className="card"><h3>Events Conducted</h3><p>34</p></div>
-        <div className="card"><h3>Pending Complaints</h3><p>5</p></div>
+        <div className="card"><h3>Total Students</h3><p>{tstudents}</p></div>
+        <div className="card"><h3>Total Coordinators</h3><p>{tc}</p></div>
+        <div className="card"><h3>Events Conducted</h3><p>{te}</p></div>
+        <div className="card"><h3>Pending Complaints</h3><p>{pc}</p></div>
       </div>
 
       <h2 className="section-title">Recent Activities</h2>
@@ -43,25 +44,25 @@ function DashboardPage() {
   );
 }
 
-function CoordinatorsPage() {
-  return <h1>Coordinators Page</h1>;
-}
+// function CoordinatorsPage() {
+//   return <h1>Coordinators Page</h1>;
+// }
 
-function StudentsPage() {
-  return <h1>Students Page</h1>;
-}
+// function StudentsPage() {
+//   return <h1>Students Page</h1>;
+// }
 
-function PerformancePage() {
-  return <h1>Performance Page</h1>;
-}
+// function PerformancePage() {
+//   return <h1>Performance Page</h1>;
+// }
 
-function FeedbackPage() {
-  return <h1>Feedback Page</h1>;
-}
+// function FeedbackPage() {
+//   return <h1>Feedback Page</h1>;
+// }
 
-function ComplaintsPage() {
-  return <h1>Complaints Page</h1>;
-}
+// function ComplaintsPage() {
+//   return <h1>Complaints Page</h1>;
+// }
 
 // --- Main Component ---
 function AdminDashboard() {
@@ -74,7 +75,7 @@ function AdminDashboard() {
 
   const renderPage = () => {
     switch (activePage) {
-      case "Dashboard": return <DashboardPage />;
+      case "Dashboard": return <DashboardPage tstudents={Tstd} te={Tevent} tc={Tcord} pc={Pendingcmt}/>;
     case "Coordinators":
         return <ManageCordinators goToPage={goToPage} />;
 
@@ -101,6 +102,27 @@ function AdminDashboard() {
 navigate("/")
 localStorage.clear()
   } 
+  const [Tstd,setTstd] = useState("")
+  const [Tevent,setTevent] = useState("")
+  const [Tcord,setTcord] = useState("")
+  const [Pendingcmt,setPendingcmt] = useState("")
+    const admindashboardstats = async()=>{
+        try{
+        const res = await api.get("/admin/stats")
+        console.log(res);
+        setTstd(res.data.allstudents)
+        setTevent(res.data.allEvents)
+        setTcord(res.data.allcoordinators)
+        setPendingcmt(res.data.pendingcomplaints)
+
+        }
+        catch(e){
+          console.log(e);
+          
+        }
+        
+      }
+      useEffect(()=>{admindashboardstats()},[])
 
   return (
     <div className="layout">
